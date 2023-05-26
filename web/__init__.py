@@ -206,6 +206,7 @@ def webserver(config, printer_index, host, port, insecure=False, **kwargs):
         - None
     """
     with config.open() as cfg:
+        import web.moonraker.server
         import web.api.ws
         import web.api.ankerctl
 
@@ -227,6 +228,7 @@ def webserver(config, printer_index, host, port, insecure=False, **kwargs):
         app.heater_target = 0.0
         app.hotbed_target = 0.0
 
+        app.register_blueprint(web.moonraker.server.router, url_prefix="/server")
         app.register_blueprint(web.api.ws.router, url_prefix="/ws")
         app.register_blueprint(web.api.ankerctl.router, url_prefix="/api/ankerctl")
 
