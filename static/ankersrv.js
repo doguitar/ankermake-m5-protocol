@@ -159,10 +159,11 @@ $(function () {
      * Auto web sockets
      */
     sockets = {};
-
+    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+    
     sockets.mqtt = new AutoWebSocket({
         name: "mqtt socket",
-        url: `ws://${location.host}/ws/mqtt`,
+        url: `${protocol}://${location.host}/ws/mqtt`,
         badge: "#badge-mqtt",
 
         message: function (ev) {
@@ -222,7 +223,7 @@ $(function () {
      */
     sockets.video = new AutoWebSocket({
         name: "Video socket",
-        url: `ws://${location.host}/ws/video`,
+        url: `${protocol}://${location.host}/ws/video`,
         badge: "#badge-pppp",
         binary: true,
 
@@ -261,7 +262,7 @@ $(function () {
 
     sockets.ctrl = new AutoWebSocket({
         name: "Control socket",
-        url: `ws://${location.host}/ws/ctrl`,
+        url: `${protocol}://${location.host}/ws/ctrl`,
         badge: "#badge-ctrl",
     });
 
